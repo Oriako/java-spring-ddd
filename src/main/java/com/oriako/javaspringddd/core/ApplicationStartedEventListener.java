@@ -1,6 +1,6 @@
-package com.practice.pokemonddd.core;
+package com.oriako.javaspringddd.core;
 
-import com.practice.pokemonddd.externalpokemon.application.ExternalPokemonReader;
+import com.oriako.javaspringddd.externalpokemon.application.ExternalPokemonReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

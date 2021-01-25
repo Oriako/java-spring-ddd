@@ -1,4 +1,4 @@
-package com.practice.pokemonddd.externalpokemon.domain;
+package com.oriako.javaspringddd.externalpokemon.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

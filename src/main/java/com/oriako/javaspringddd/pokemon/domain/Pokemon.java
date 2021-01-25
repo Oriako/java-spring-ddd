@@ -1,4 +1,4 @@
-package com.practice.pokemonddd.pokemon.domain;
+package com.oriako.javaspringddd.pokemon.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,7 +1,7 @@
-package com.practice.pokemonddd.pokemon.infrastructure;
+package com.oriako.javaspringddd.pokemon.infrastructure;
 
-import com.practice.pokemonddd.pokemon.domain.Pokemon;
-import com.practice.pokemonddd.pokemon.domain.PokemonRepository;
+import com.oriako.javaspringddd.pokemon.domain.Pokemon;
+import com.oriako.javaspringddd.pokemon.domain.PokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

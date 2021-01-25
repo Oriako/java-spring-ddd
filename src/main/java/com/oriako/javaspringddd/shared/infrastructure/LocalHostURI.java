@@ -1,4 +1,4 @@
-package com.practice.pokemonddd.shared.infrastructure;
+package com.oriako.javaspringddd.shared.infrastructure;
 
 import java.net.URI;
 

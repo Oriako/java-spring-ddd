@@ -1,6 +1,6 @@
-package com.practice.pokemonddd.pokemon.infrastructure;
+package com.oriako.javaspringddd.pokemon.infrastructure;
 
-import com.practice.pokemonddd.pokemon.domain.Pokemon;
+import com.oriako.javaspringddd.pokemon.domain.Pokemon;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JpaPokemonRepository extends JpaRepository<Pokemon, Integer> {

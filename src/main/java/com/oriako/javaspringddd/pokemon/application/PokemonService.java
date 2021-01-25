@@ -1,8 +1,8 @@
-package com.practice.pokemonddd.pokemon.application;
+package com.oriako.javaspringddd.pokemon.application;
 
-import com.practice.pokemonddd.pokemon.domain.Pokemon;
-import com.practice.pokemonddd.pokemon.domain.PokemonName;
-import com.practice.pokemonddd.pokemon.domain.PokemonRepository;
+import com.oriako.javaspringddd.pokemon.domain.Pokemon;
+import com.oriako.javaspringddd.pokemon.domain.PokemonName;
+import com.oriako.javaspringddd.pokemon.domain.PokemonRepository;
 import org.springframework.stereotype.Service;
 
 @Service

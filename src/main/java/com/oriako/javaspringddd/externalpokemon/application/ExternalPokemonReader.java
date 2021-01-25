@@ -1,11 +1,11 @@
-package com.practice.pokemonddd.externalpokemon.application;
+package com.oriako.javaspringddd.externalpokemon.application;
 
-import com.practice.pokemonddd.externalpokemon.domain.ExternalPokemon;
-import com.practice.pokemonddd.externalpokemon.domain.ExternalPokemonGameIndex;
-import com.practice.pokemonddd.externalpokemon.domain.ExternalPokemonInfo;
-import com.practice.pokemonddd.externalpokemon.domain.ExternalPokemonList;
-import com.practice.pokemonddd.shared.application.OriakoObjectMapper;
-import com.practice.pokemonddd.shared.infrastructure.LocalHostURI;
+import com.oriako.javaspringddd.externalpokemon.domain.ExternalPokemon;
+import com.oriako.javaspringddd.externalpokemon.domain.ExternalPokemonGameIndex;
+import com.oriako.javaspringddd.externalpokemon.domain.ExternalPokemonInfo;
+import com.oriako.javaspringddd.externalpokemon.domain.ExternalPokemonList;
+import com.oriako.javaspringddd.shared.infrastructure.OriakoObjectMapper;
+import com.oriako.javaspringddd.shared.infrastructure.LocalHostURI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;

@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JavaSpringDddApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JavaSpringDddApplication.class, args);
+		SpringApplication springApplication = new SpringApplication(JavaSpringDddApplication.class);
+		springApplication.addListeners(new ApplicationStartedEventListener());
+		springApplication.run(args);
 	}
 
 }

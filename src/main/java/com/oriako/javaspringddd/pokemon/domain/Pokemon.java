@@ -6,11 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "pokemon")
 public class Pokemon {
 
     @Id
-    @Column
+    @Column (name = "name")
     private String pokemonName;
 
     public Pokemon() {

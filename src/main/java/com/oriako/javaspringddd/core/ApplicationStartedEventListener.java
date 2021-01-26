@@ -1,8 +1,6 @@
 package com.oriako.javaspringddd.core;
 
-import com.oriako.javaspringddd.externalpokemon.application.ExternalPokemonReader;
 import com.oriako.javaspringddd.shared.infrastructure.LocalHostURI;
-import com.oriako.javaspringddd.shared.infrastructure.NullAccepterObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

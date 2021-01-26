@@ -14,8 +14,8 @@ public class PokemonCreateService {
         this.pokemonRepository = pokemonRepository;
     }
 
-    public Pokemon create(PokemonName pokemonId) {
-        Pokemon pokemon = Pokemon.create(pokemonId);
+    public Pokemon create(PokemonName pokemonId, Integer weight, Integer height, Integer baseExp) {
+        Pokemon pokemon = Pokemon.create(pokemonId, weight, height, baseExp);
         return pokemonRepository.create(pokemon);
     }
 

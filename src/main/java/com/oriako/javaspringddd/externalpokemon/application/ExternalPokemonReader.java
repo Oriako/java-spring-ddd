@@ -15,7 +15,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ExternalPokemonReader {
@@ -56,7 +58,12 @@ public class ExternalPokemonReader {
                         if (versionList != null) {
                             if (versionList.stream().filter(p -> p.getVersion().getName().equals(versionName)).count() > 0) {
                                 // Creo que lo ideal sería lanzar un evento de pokemon leído para que lo capturase nuestro dominio de pokemon local y lo guardase, por ahora, hacemos una conexión entre servicios
-                                String createResponse = restTemplate.getForObject(LocalHostURI.createURI("pokemon/create?pokemonName=" + pokemonDetailResponse.getName()), String.class);
+                                Map<String,Object> requestParameters = new HashMap<>();
+                                requestParameters.put("pokemonName", pokemonDetailResponse.getName());
+                                requestParameters.put("height", pokemonDetailResponse.getHeight());
+                                requestParameters.put("weight", pokemonDetailResponse.getWeight());
+                                requestParameters.put("baseExp", pokemonDetailResponse.getBaseExperience());
+                                String createResponse = restTemplate.getForObject(LocalHostURI.createURI("pokemon/create", requestParameters), String.class);
                                 if (createResponse.equals("OK")) {
                                     countDiff++;
                                 }

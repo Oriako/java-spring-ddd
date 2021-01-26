@@ -17,12 +17,12 @@ public class PokemonCreateController {
     private H2PokemonRepository pokemonRepository;
 
     @RequestMapping("/pokemon/create")
-    public String createAll(@RequestParam Optional<String> pokemonName) {
+    public String createAll(@RequestParam Optional<String> pokemonName, @RequestParam Optional<Integer> weight, @RequestParam Optional<Integer> height, @RequestParam Optional<Integer> baseExp) {
         String result = "OK";
         try {
             PokemonName voPokemonId = new PokemonName(pokemonName.orElseThrow());
             PokemonCreateService service = new PokemonCreateService(pokemonRepository);
-            service.create(voPokemonId);
+            service.create(voPokemonId, weight.orElseThrow(), height.orElseThrow(), baseExp.orElseThrow());
         } catch (Throwable e) {
             result = "KO";
         }

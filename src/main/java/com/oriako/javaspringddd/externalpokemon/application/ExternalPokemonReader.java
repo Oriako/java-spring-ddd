@@ -4,10 +4,11 @@ import com.oriako.javaspringddd.externalpokemon.domain.ExternalPokemon;
 import com.oriako.javaspringddd.externalpokemon.domain.ExternalPokemonGameIndex;
 import com.oriako.javaspringddd.externalpokemon.domain.ExternalPokemonInfo;
 import com.oriako.javaspringddd.externalpokemon.domain.ExternalPokemonList;
-import com.oriako.javaspringddd.shared.infrastructure.OriakoObjectMapper;
+import com.oriako.javaspringddd.shared.domain.IObjectMapper;
 import com.oriako.javaspringddd.shared.infrastructure.LocalHostURI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -16,13 +17,20 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
+@Service
 public class ExternalPokemonReader {
 
     private static final Logger LOG = LoggerFactory.getLogger(ExternalPokemonReader.class);
+    private IObjectMapper objectMapper;
+
+    public ExternalPokemonReader(IObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     public int loadPokemonData(String versionName) throws Throwable {
         int count = 0;
 
+        final RestTemplate restTemplate = new RestTemplate();
         HttpClient client = HttpClient.newHttpClient();
 
         String nextPage = "https://pokeapi.co/api/v2/pokemon/";
@@ -33,7 +41,7 @@ public class ExternalPokemonReader {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             try {
-                ExternalPokemonList pokemonListResponse = OriakoObjectMapper.getInstance().readValue(response.body(), ExternalPokemonList.class);
+                ExternalPokemonList pokemonListResponse = objectMapper.parseStringToObject(response.body(), ExternalPokemonList.class);
                 nextPage = pokemonListResponse.getNext();
 
                 List<ExternalPokemonInfo> resultList = pokemonListResponse.getResults();
@@ -43,12 +51,12 @@ public class ExternalPokemonReader {
                     for (ExternalPokemonInfo result : resultList) {
                         HttpRequest detailRequest = HttpRequest.newBuilder().uri(URI.create(result.getUrl())).build();
                         HttpResponse<String> detailResponse = client.send(detailRequest, HttpResponse.BodyHandlers.ofString());
-                        ExternalPokemon pokemonDetailResponse = OriakoObjectMapper.getInstance().readValue(detailResponse.body(), ExternalPokemon.class);
+                        ExternalPokemon pokemonDetailResponse = objectMapper.parseStringToObject(detailResponse.body(), ExternalPokemon.class);
                         List<ExternalPokemonGameIndex> versionList = pokemonDetailResponse.getGameIndexList();
                         if (versionList != null) {
-                            if (versionList.stream().filter(p -> p.getVersion().getName().equals("red")).count() > 0) {
+                            if (versionList.stream().filter(p -> p.getVersion().getName().equals(versionName)).count() > 0) {
                                 // Creo que lo ideal sería lanzar un evento de pokemon leído para que lo capturase nuestro dominio de pokemon local y lo guardase, por ahora, hacemos una conexión entre servicios
-                                String createResponse = new RestTemplate().getForObject(new LocalHostURI("pokemon/create?pokemonName=" + pokemonDetailResponse.getName()).getURI(), String.class);
+                                String createResponse = restTemplate.getForObject(LocalHostURI.createURI("pokemon/create?pokemonName=" + pokemonDetailResponse.getName()), String.class);
                                 if (createResponse.equals("OK")) {
                                     countDiff++;
                                 }

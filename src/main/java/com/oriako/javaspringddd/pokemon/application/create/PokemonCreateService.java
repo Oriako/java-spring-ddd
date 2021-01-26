@@ -1,4 +1,4 @@
-package com.oriako.javaspringddd.pokemon.application;
+package com.oriako.javaspringddd.pokemon.application.create;
 
 import com.oriako.javaspringddd.pokemon.domain.Pokemon;
 import com.oriako.javaspringddd.pokemon.domain.PokemonName;
@@ -6,11 +6,11 @@ import com.oriako.javaspringddd.pokemon.domain.PokemonRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PokemonService {
+public class PokemonCreateService {
 
     private PokemonRepository pokemonRepository;
 
-    public PokemonService(PokemonRepository pokemonRepository) {
+    public PokemonCreateService(PokemonRepository pokemonRepository) {
         this.pokemonRepository = pokemonRepository;
     }
 

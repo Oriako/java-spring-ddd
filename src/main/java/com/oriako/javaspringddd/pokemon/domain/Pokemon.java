@@ -1,5 +1,8 @@
 package com.oriako.javaspringddd.pokemon.domain;
 
+import com.oriako.javaspringddd.pokemon.domain.create.PokemonCreatedDomainEvent;
+import com.oriako.javaspringddd.shared.domain.AggregateRoot;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "pokemon")
-public class Pokemon {
+public class Pokemon extends AggregateRoot {
 
     @Id
     @Column (name = "name")
@@ -30,10 +33,9 @@ public class Pokemon {
         this.baseExp = baseExp;
     }
 
-    public static Pokemon create(PokemonName pokemonId, Integer weight, Integer height, Integer baseExp) {
-        Pokemon pokemon = new Pokemon(pokemonId, weight, height, baseExp);
-
-        // Events
+    public static Pokemon create(PokemonName pokemonName, Integer weight, Integer height, Integer baseExp) {
+        Pokemon pokemon = new Pokemon(pokemonName, weight, height, baseExp);
+        pokemon.record(new PokemonCreatedDomainEvent(pokemonName.getName()));
 
         return pokemon;
     }

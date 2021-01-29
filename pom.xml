@@ -16,6 +16,8 @@
 	<description>Base Java Spring application project using DDD architecture</description>
 	<properties>
 		<java.version>11</java.version>
+		<rabbitmq-amqp.version>5.10.0</rabbitmq-amqp.version>
+		<axon.version>4.4.6</axon.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,6 +29,17 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.axonframework</groupId>
+			<artifactId>axon</artifactId>
+			<version>${axon.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>${rabbitmq-amqp.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>

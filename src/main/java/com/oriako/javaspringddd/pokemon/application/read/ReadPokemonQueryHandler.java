@@ -1,10 +1,8 @@
 package com.oriako.javaspringddd.pokemon.application.read;
 
-import com.oriako.javaspringddd.pokemon.application.create.PokemonCreateService;
 import com.oriako.javaspringddd.pokemon.domain.Pokemon;
 import com.oriako.javaspringddd.pokemon.domain.PokemonName;
 import com.oriako.javaspringddd.pokemon.domain.PokemonVO;
-import com.oriako.javaspringddd.pokemon.domain.create.PokemonCreateCommand;
 import com.oriako.javaspringddd.pokemon.domain.read.ReadPokemonQuery;
 import com.oriako.javaspringddd.pokemon.infrastructure.repository.H2PokemonRepository;
 import com.oriako.javaspringddd.shared.domain.querybus.IQueryHandler;

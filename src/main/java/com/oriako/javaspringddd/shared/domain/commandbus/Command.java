@@ -10,4 +10,8 @@ public abstract class Command {
         this.messageId = messageId;
     }
 
+    public UUID getMessageId() {
+        return messageId;
+    }
+    
 }

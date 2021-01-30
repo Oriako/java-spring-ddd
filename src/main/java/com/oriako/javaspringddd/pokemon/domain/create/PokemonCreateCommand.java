@@ -1,7 +1,7 @@
 package com.oriako.javaspringddd.pokemon.domain.create;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.oriako.javaspringddd.shared.domain.commandbus.Command;
-import lombok.Data;
 
 import java.util.UUID;
 
@@ -12,6 +12,7 @@ public final class PokemonCreateCommand extends Command {
     private Integer weight;
     private Integer baseExp;
 
+    @JsonCreator
     public PokemonCreateCommand(UUID messageId, String pokemonName, Integer height, Integer weight, Integer baseExp) {
         super(messageId);
         this.pokemonName = pokemonName;

@@ -6,7 +6,6 @@ import com.oriako.javaspringddd.shared.domain.commandbus.ICommandHandler;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -15,11 +14,11 @@ import java.util.Map;
 
 @Component
 @Primary
-public class SpringCommandBus implements ICommandBus {
+public class SyncSpringCommandBus implements ICommandBus {
 
     private Map<Class, ICommandHandler> handlers;
 
-    public SpringCommandBus(List<ICommandHandler> commandHandlerImplementations) {
+    public SyncSpringCommandBus(List<ICommandHandler> commandHandlerImplementations) {
         this.handlers = new HashMap<>();
         commandHandlerImplementations.forEach(commandHandler -> {
             Class<?> commandClass = getCommandClass(commandHandler);

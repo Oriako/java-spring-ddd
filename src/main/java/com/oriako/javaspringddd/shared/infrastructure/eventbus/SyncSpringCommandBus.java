@@ -15,11 +15,11 @@ import java.util.Map;
 
 @Component
 @Primary
-public class SpringCommandBus implements ICommandBus {
+public class SyncSpringCommandBus implements ICommandBus {
 
     private Map<Class, ICommandHandler> handlers;
 
-    public SpringCommandBus(List<ICommandHandler> commandHandlerImplementations) {
+    public SyncSpringCommandBus(List<ICommandHandler> commandHandlerImplementations) {
         this.handlers = new HashMap<>();
         commandHandlerImplementations.forEach(commandHandler -> {
             Class<?> commandClass = getCommandClass(commandHandler);

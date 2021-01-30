@@ -1,7 +1,9 @@
 package com.oriako.javaspringddd.shared.infrastructure;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.oriako.javaspringddd.shared.domain.IObjectMapper;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,7 @@ public class NullAccepterObjectMapper extends ObjectMapper implements IObjectMap
 
     public NullAccepterObjectMapper() {
         configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        registerModule(new ParameterNamesModule(JsonCreator.Mode.PROPERTIES));
         instance = this;
     }
 

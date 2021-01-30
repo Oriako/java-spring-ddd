@@ -33,7 +33,7 @@ public class PokemonCreateController {
             PokemonCreateCommand createCommand = new PokemonCreateCommand(UUID.randomUUID(), pokemonName.orElseThrow(), weight.orElseThrow(), height.orElseThrow(), baseExp.orElseThrow());
             commandBus.dispatch(createCommand);
 
-            PokemonVO resultingPokemon = queryBus.dispatch(new ReadPokemonQuery(pokemonName.orElseThrow()));
+            PokemonVO resultingPokemon = queryBus.ask(new ReadPokemonQuery(pokemonName.orElseThrow()));
             if (resultingPokemon != null) {
                 result = "OK";
             }

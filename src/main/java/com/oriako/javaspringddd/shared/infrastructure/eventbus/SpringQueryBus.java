@@ -27,7 +27,7 @@ public class SpringQueryBus implements IQueryBus {
     }
 
     @Override
-    public <T> T dispatch(Query<T> query) throws Exception {
+    public <T> T ask(Query<T> query) throws Exception {
         if (!handlers.containsKey(query.getClass())) {
             throw new Exception(String.format("No handler for %s", query.getClass().getName()));
         }

@@ -16,14 +16,19 @@ import java.util.Map;
 @Primary
 public class SpringQueryBus implements IQueryBus {
 
-    private Map<Class, IQueryHandler> handlers;
+    private Map<Class<? extends Query>, IQueryHandler> handlers;
 
     public SpringQueryBus(List<IQueryHandler> queryHandlerImplementations) {
         this.handlers = new HashMap<>();
         queryHandlerImplementations.forEach(queryHandler -> {
             Class queryClass = getQueryClass(queryHandler);
-            handlers.put(queryClass, queryHandler);
+            register(queryClass, queryHandler);
         });
+    }
+
+    @Override
+    public void register(Class<? extends Query> queryClass, IQueryHandler queryHandler) {
+        handlers.put(queryClass, queryHandler);
     }
 
     @Override
@@ -34,14 +39,14 @@ public class SpringQueryBus implements IQueryBus {
         return (T) handlers.get(query.getClass()).handle(query);
     }
 
-    private Class<?> getQueryClass(IQueryHandler handler) {
+    private Class<? extends Query> getQueryClass(IQueryHandler handler) {
         Type commandInterface = ((ParameterizedType) handler.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[1];
         return getClass(commandInterface.getTypeName());
     }
 
-    private Class<?> getClass(String name) {
+    private Class<? extends Query> getClass(String name) {
         try {
-            return Class.forName(name);
+            return (Class<? extends Query>) Class.forName(name);
         } catch (Exception e) {
             return null;
         }

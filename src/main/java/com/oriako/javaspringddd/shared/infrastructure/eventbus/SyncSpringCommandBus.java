@@ -16,14 +16,19 @@ import java.util.Map;
 @Primary
 public class SyncSpringCommandBus implements ICommandBus {
 
-    private Map<Class, ICommandHandler> handlers;
+    private Map<Class<? extends Command>, ICommandHandler> handlers;
 
     public SyncSpringCommandBus(List<ICommandHandler> commandHandlerImplementations) {
         this.handlers = new HashMap<>();
         commandHandlerImplementations.forEach(commandHandler -> {
-            Class<?> commandClass = getCommandClass(commandHandler);
-            handlers.put(commandClass, commandHandler);
+            Class<? extends Command> commandClass = (Class<? extends Command>) getCommandClass(commandHandler);
+            register(commandClass, commandHandler);
         });
+    }
+
+    @Override
+    public void register(Class<? extends Command> commandClass, ICommandHandler commandHandler) {
+        handlers.put(commandClass, commandHandler);
     }
 
     @Override
@@ -34,14 +39,14 @@ public class SyncSpringCommandBus implements ICommandBus {
         handlers.get(command.getClass()).handle(command);
     }
 
-    private Class<?> getCommandClass(ICommandHandler handler) {
+    private Class<? extends Command> getCommandClass(ICommandHandler handler) {
         Type commandInterface = ((ParameterizedType) handler.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
         return getClass(commandInterface.getTypeName());
     }
 
-    private Class<?> getClass(String name) {
+    private Class<? extends Command> getClass(String name) {
         try {
-            return Class.forName(name);
+            return (Class<? extends Command>) Class.forName(name);
         } catch (Exception e) {
             return null;
         }

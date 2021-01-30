@@ -2,6 +2,7 @@ package com.oriako.javaspringddd.shared.domain.commandbus;
 
 public interface ICommandBus {
 
-    void dispatch(Command command) throws Exception;
+    public void register(Class<? extends Command> commandClass, ICommandHandler commandHandler);
+    public void dispatch(Command command) throws Exception;
 
 }

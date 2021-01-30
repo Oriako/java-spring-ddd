@@ -4,6 +4,7 @@ import com.oriako.javaspringddd.queueentity.application.QueueEntityService;
 import com.oriako.javaspringddd.queueentity.infrastructure.H2QueueEntityRepository;
 import com.oriako.javaspringddd.shared.domain.commandbus.Command;
 import com.oriako.javaspringddd.shared.domain.commandbus.ICommandBus;
+import com.oriako.javaspringddd.shared.domain.commandbus.ICommandHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,11 @@ public class AsyncSpringCommandBus implements ICommandBus {
     @PostConstruct
     public void init() {
         queueEntityService = new QueueEntityService(queueEntityRepository);
+    }
+
+    @Override
+    public void register(Class<? extends Command> commandClass, ICommandHandler commandHandler) {
+
     }
 
     @Override

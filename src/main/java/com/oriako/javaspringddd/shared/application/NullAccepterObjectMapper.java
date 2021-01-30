@@ -1,4 +1,4 @@
-package com.oriako.javaspringddd.shared.infrastructure;
+package com.oriako.javaspringddd.shared.application;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.DeserializationFeature;

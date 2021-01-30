@@ -2,8 +2,8 @@ package com.oriako.javaspringddd.queueentity.application;
 
 import com.oriako.javaspringddd.queueentity.domain.QueueEntity;
 import com.oriako.javaspringddd.queueentity.domain.QueueEntityRepository;
+import com.oriako.javaspringddd.shared.application.NullAccepterObjectMapper;
 import com.oriako.javaspringddd.shared.domain.commandbus.Command;
-import com.oriako.javaspringddd.shared.infrastructure.NullAccepterObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;

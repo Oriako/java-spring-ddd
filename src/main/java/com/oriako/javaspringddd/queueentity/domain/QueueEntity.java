@@ -14,7 +14,7 @@ public class QueueEntity extends AggregateRoot {
 
     @Id
     @Column(name = "command_id")
-    private String commandId;
+    private UUID commandId;
     @Column (name = "execution_time_utc")
     private Long executionTime;
     @Column (name = "command_name")
@@ -25,12 +25,12 @@ public class QueueEntity extends AggregateRoot {
     private Integer status; //Cutre pero 0 pending, 1 in_progress y 2 completed
 
     public QueueEntity() {
-
+        super();
     }
 
     public QueueEntity(UUID commandId, Long executionTime, String commandName, String commandSerialized, Integer status) {
         super();
-        this.commandId = commandId.toString();
+        this.commandId = commandId;
         this.executionTime = executionTime;
         this.commandName = commandName;
         this.commandSerialized = commandSerialized;
@@ -41,7 +41,7 @@ public class QueueEntity extends AggregateRoot {
         this.status = newStatus;
     }
 
-    public String getCommandId() {
+    public UUID getCommandId() {
         return commandId;
     }
 
